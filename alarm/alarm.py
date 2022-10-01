@@ -1,6 +1,5 @@
 # Import necessaries libraries
 # to build alarm clock.
-from ast import Break
 from tkinter import *
 import tkinter as tk
 import datetime
