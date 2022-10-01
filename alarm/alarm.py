@@ -1,5 +1,6 @@
 # Import necessaries libraries
 # to build alarm clock.
+from ast import Break
 from tkinter import *
 import tkinter as tk
 import datetime
@@ -22,7 +23,8 @@ def alarm(set_alarm_timer):
                 winsound.Beep(500,900)
             break
         if now >= set_alarm_timer:
-            break      
+            break
+    return
             
 def actual_time():
     # f-string format with {} for expression to evaluate.
@@ -36,6 +38,16 @@ def digital_clock_date():
     show_date['text'] = current_date
     show_time.after(200,digital_clock_date)  # show_time.after is a SystemEvent after 200ms.
     show_date.after(500000,digital_clock_date)  # show_date.after is a SystemEvent after 500000ms.
+
+# Function to reset alarm input.
+def reset():
+    hour.set("")
+    min.set("")
+    sec.set("")
+
+# Function to exit window.
+def exit():
+    clock.destroy()
 
 # Creating GUI using tkinter.
 clock = Tk()
@@ -65,20 +77,11 @@ hour_time = Entry(clock, textvariable = hour, font=("ArialBlack",18,"bold"), bg 
 min_time = Entry(clock, textvariable = min, font=("ArialBlack",18,"bold"), bg = "lightgrey", width=20,).place(x=210, y=60)
 sec_time = Entry(clock, textvariable = sec, font=("ArialBlack",18,"bold"), bg = "lightgrey", width=20,).place(x=270, y=60)
 
-# Function to reset alarm input.
-def reset():
-    hour.set("")
-    min.set("")
-    sec.set("")
-
-# Function to exit window.
-def exit():
-    clock.destroy()
-
 # Alarm button confirmation for user.
 submit_button = Button(clock, text="Set Alarm", font=("ArialBlack",18), fg="black", bg="lightgrey", width=15, command=actual_time).place(x=165, y=120)
 exit_button = Button(clock, text="Exit", font=("ArialBlack",14), fg="black", bg="orangered", width=13, command=exit).place(x=195, y=180)
 reset_button = Button(clock, text="Reset", font=("ArialBlack",14), fg="black", bg="lightgreen", width=13, command=reset).place(x=195*2, y=180)
+# output_message = Entry(clock, font = 'arial 10 bold', textvariable = alarm_output, bg ='ghost white', width=23, ).place(x=10, y=180 )
 
 # Execution window.
 digital_clock_date()
